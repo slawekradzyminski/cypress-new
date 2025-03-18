@@ -75,16 +75,5 @@
         "imageUrl": "http://localhost:8082/images/applewatch.png",
         "createdAt": "2025-03-18T13:02:31.128098",
         "updatedAt": "2025-03-18T13:02:31.128133"
-    },
-    {
-        "id": 8,
-        "name": "Sony WH-1000XM4",
-        "description": "Industry-leading noise canceling wireless headphones with exceptional sound",
-        "price": 349.99,
-        "stockQuantity": 85,
-        "category": "Audio",
-        "imageUrl": "http://localhost:8082/images/sony.png",
-        "createdAt": "2025-03-18T13:02:31.13059",
-        "updatedAt": "2025-03-18T13:02:31.130635"
     }
 ]
