@@ -10,7 +10,7 @@
     "lib": ["es6", "dom"],
     "types": [
       "cypress",
-      // "@percy/cypress"
+      "@percy/cypress"
       ]
   },
   "include": ["**/*.js", "**/*.ts"]

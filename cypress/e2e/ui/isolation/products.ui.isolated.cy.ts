@@ -19,10 +19,11 @@ describe('Products page isolated tests', () => {
     it('should display all products', () => {
         // then
         cy.get('[data-testid=product-item]').should('have.length', products.length)
-        cy.get('[data-testid=product-item] h3').each(($el, i) => {
+        cy.get('[data-testid=product-item] h3').each(($el) => {
             const names = products.map(it => it.name)
             expect(names).to.contain($el.text())
         })
+        cy.percySnapshot('ProductsPage')
     })
   })
   
