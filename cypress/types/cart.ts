@@ -1,11 +1,8 @@
-interface CartItem {
-    productId: number,
-    quantity: number
-}
+import { CartItem } from "./cartItem";
 
-export interface CartResponse {
-    username: string,
-    totalPrice: number,
-    totalItems: number,
-    items: CartItem[]
+export interface Cart {
+    username: string;
+    items: CartItem[];
+    totalPrice: number;
+    totalItems: number;
 }
