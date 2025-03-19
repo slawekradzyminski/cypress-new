@@ -36,4 +36,13 @@ describe('Login page tests', () => {
         cy.get('._description_gmcqp_50').should('have.text', 'Invalid username/password')
     })
 
+    it('should open register page', () => {
+        // when
+        cy.get('button').contains('Register').click()
+
+        // then
+        cy.get('.mt-6').should('have.text', 'Create your account')
+        cy.url().should('contain', '/register')
+    })
+
 })
