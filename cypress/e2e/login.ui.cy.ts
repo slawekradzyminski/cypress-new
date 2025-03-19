@@ -45,4 +45,16 @@ describe('Login page tests', () => {
         cy.url().should('contain', '/register')
     })
 
+    it('should trigger frontend validation', () => {
+        // when
+        cy.get('#username').type('123')
+        cy.get('button').contains('Sign in').click()
+
+        // then
+        cy.get('.text-red-600').eq(0).should('have.text', 'Username must be at least 4 characters')
+        cy.get('.text-red-600').eq(1).should('have.text', 'Password is required')
+        cy.get('#username').should('have.class', 'border-red-500')
+        cy.get('#password').should('have.class', 'border-red-500')
+    })
+
 })
