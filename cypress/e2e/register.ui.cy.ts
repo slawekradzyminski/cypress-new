@@ -8,7 +8,7 @@ describe('Register page tests', () => {
         cy.visit('http://localhost:8081/register')
     })
  
-    it.only('should successfully register new user', () => {
+    it('should successfully register new user', () => {
         // given
         const user = generateUser()
 
