@@ -8,7 +8,7 @@
     "strict": true,
     "moduleResolution": "node",
     "lib": ["es6", "dom"],
-    "types": ["cypress", "@percy/cypress"]
+    "types": ["cypress"]
   },
   "include": ["**/*.js", "**/*.ts"]
 }
