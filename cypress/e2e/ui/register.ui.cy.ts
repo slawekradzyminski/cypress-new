@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { generateUser } from "../../generators/userGenerator"
+import { registerPage } from "../../pages/registerPage"
 
 describe('Register page tests', { env: { snapshotOnly: true } }, () => {
 
@@ -13,12 +14,7 @@ describe('Register page tests', { env: { snapshotOnly: true } }, () => {
         const user = generateUser()
 
         // when
-        cy.get('#username').type(user.username)
-        cy.get('#email').type(user.email)
-        cy.get('#password').type(user.password)
-        cy.get('#firstName').type(user.firstName)
-        cy.get('#lastName').type(user.lastName)
-        cy.get('button').contains('Create account').click()
+        registerPage.attemptRegister(user)
 
         // then
         cy.get('._description_gmcqp_50').should('contain.text', 'Registration successful')
@@ -27,15 +23,11 @@ describe('Register page tests', { env: { snapshotOnly: true } }, () => {
 
     it('should fail to register if user already exists', () => {
         // given
-        const usernameWhichExists = 'admin'
+        const user = generateUser()
+        cy.register(user)
 
         // when
-        cy.get('#username').type(usernameWhichExists)
-        cy.get('#email').type('email@gmail.com')
-        cy.get('#password').type('p@ssw0rd')
-        cy.get('#firstName').type('Janek')
-        cy.get('#lastName').type('Nowak')
-        cy.get('button').contains('Create account').click()
+        registerPage.attemptRegister(user)
 
         // then
         cy.get('._description_gmcqp_50').should('have.text', 'Username already exists')
