@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { generateUser } from "../generators/userGenerator"
+import { generateUser } from "../../generators/userGenerator"
 
 describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
