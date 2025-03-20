@@ -24,6 +24,11 @@ describe('GET /api/products API tests', () => {
                 expect(response.body.length).to.be.at.least(5)
             })
         })
+
+        // cleanup
+        cy.get('@token').then(token => {
+            cy.deleteUser(user.username, `${token}`)
+        })
     })
 
     it('should get 401 with invalid jwt token', () => {

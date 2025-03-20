@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { generateUser } from "../../generators/userGenerator"
+import { loginPage } from "../../pages/loginPage"
 
 describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
@@ -21,9 +22,7 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
         cy.register(user)
 
         // when
-        cy.get('#username').type(user.username)
-        cy.get('#password').type(user.password)
-        cy.get('button').contains('Sign in').click()
+        loginPage.attemptLogin(user.username, user.password)
 
         // then
         cy.get('h1').should('contain.text', user.firstName)
@@ -34,9 +33,7 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
     it('should fail to login', () => {
         // when
-        cy.get('#username').type('wrong')
-        cy.get('#password').type('wrong')
-        cy.get('button').contains('Sign in').click()
+        loginPage.attemptLogin('wrong', 'wrong')
 
         // then
         cy.get('._description_gmcqp_50').should('have.text', 'Invalid username/password')
@@ -44,7 +41,7 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
     it('should open register page', () => {
         // when
-        cy.get('button').contains('Register').click()
+        loginPage.clickRegister()
 
         // then
         cy.get('.mt-6').should('have.text', 'Create your account')
@@ -54,7 +51,7 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
     it('should trigger frontend validation', () => {
         // when
         cy.get('#username').type('123')
-        cy.get('button').contains('Sign in').click()
+        loginPage.clickSignIn()
 
         // then
         cy.get('.text-red-600').eq(0).should('have.text', 'Username must be at least 4 characters')

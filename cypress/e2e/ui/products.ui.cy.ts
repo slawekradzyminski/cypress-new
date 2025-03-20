@@ -3,7 +3,7 @@
 import { generateUser } from "../../generators/userGenerator"
 import { User } from "../../types/user"
 
-describe('Products page tests', () => {
+describe('Products page tests', { env: { snapshotOnly: true } }, () => {
     let user: User
   
     beforeEach(() => {
