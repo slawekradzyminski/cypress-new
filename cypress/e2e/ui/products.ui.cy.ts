@@ -13,7 +13,7 @@ describe('Products page tests', { env: { snapshotOnly: true } }, () => {
         cy.get('@token').then(token => {
             localStorage.setItem('token', `${token}`)
         })
-        cy.visit('http://localhost:8081/products')
+        cy.visit('/products')
     })
 
     afterEach(() => {

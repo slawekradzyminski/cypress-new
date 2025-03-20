@@ -1,12 +1,13 @@
 /// <reference types="cypress" />
 
 import { generateUser } from "../../generators/userGenerator"
+import { toast } from "../../pages/components/toast"
 import { loginPage } from "../../pages/loginPage"
 
 describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:8081')
+        cy.visit('')
     })
 
     it('should display all important login page elements', () => {
@@ -36,7 +37,7 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
         loginPage.attemptLogin('wrong', 'wrong')
 
         // then
-        cy.get('._description_gmcqp_50').should('have.text', 'Invalid username/password')
+        toast.verifyError('Invalid username/password')
     })
 
     it('should open register page', () => {

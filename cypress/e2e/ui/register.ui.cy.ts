@@ -7,7 +7,7 @@ import { registerPage } from "../../pages/registerPage"
 describe('Register page tests', { env: { snapshotOnly: true } }, () => {
 
     beforeEach(() => {
-        cy.visit('http://localhost:8081/register')
+        cy.visit('/register')
     })
  
     it('should successfully register new user', () => {
