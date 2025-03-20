@@ -6,7 +6,7 @@ const MAX_ATTEMPTS = 20;
 
 const isValid = (str: string) => str.length >= MIN_LENGTH;
 
-export const generateUser = (): User => {
+export const generateUser = (roles = [Roles.ROLE_ADMIN, Roles.ROLE_CLIENT]): User => {
     let attempts = 0;
     let user: User;
 
@@ -17,7 +17,7 @@ export const generateUser = (): User => {
             firstName: faker.person.firstName(),
             lastName: faker.person.lastName(),
             email: faker.internet.email(),
-            roles: [Roles.ROLE_ADMIN, Roles.ROLE_CLIENT],
+            roles: roles,
         };
         attempts++;
     } while (!(isValid(user.username) && isValid(user.firstName) && isValid(user.lastName)) && attempts < MAX_ATTEMPTS);

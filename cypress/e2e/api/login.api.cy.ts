@@ -2,12 +2,13 @@
 /// <reference types="cypress" />
 
 import { generateUser } from "../../generators/userGenerator"
+import { Roles } from "../../types/user"
 
 describe('Login API POST /users/signin tests', () => {
 
     it('should successfully login', () => {
         // given
-        const user = generateUser()
+        const user = generateUser([Roles.ROLE_CLIENT])
         cy.register(user)
 
         // when + then
