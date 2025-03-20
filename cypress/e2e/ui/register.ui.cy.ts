@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { generateUser } from "../../generators/userGenerator"
+import { toast } from "../../pages/components/toast"
 import { registerPage } from "../../pages/registerPage"
 
 describe('Register page tests', { env: { snapshotOnly: true } }, () => {
@@ -17,7 +18,7 @@ describe('Register page tests', { env: { snapshotOnly: true } }, () => {
         registerPage.attemptRegister(user)
 
         // then
-        cy.get('._description_gmcqp_50').should('contain.text', 'Registration successful')
+        toast.verifySuccess('Registration successful')
         cy.url().should('contain', '/login')
     })
 
@@ -30,7 +31,7 @@ describe('Register page tests', { env: { snapshotOnly: true } }, () => {
         registerPage.attemptRegister(user)
 
         // then
-        cy.get('._description_gmcqp_50').should('have.text', 'Username already exists')
+        toast.verifyError('Username already exists')
     })
  
  })
