@@ -1,17 +1,25 @@
 /// <reference types="cypress" />
 
 import { generateUser } from "../../generators/userGenerator"
+import { User } from "../../types/user"
 
 describe('Products page tests', () => {
+    let user: User
   
     beforeEach(() => {
-        const user = generateUser()
+        user = generateUser()
         cy.register(user)
         cy.login(user.username, user.password)
         cy.get('@token').then(token => {
             localStorage.setItem('token', `${token}`)
         })
         cy.visit('http://localhost:8081/products')
+    })
+
+    afterEach(() => {
+        cy.get('@token').then(token => {
+            cy.deleteUser(user.username, `${token}`)
+        })
     })
 
     it('should display products and categories', () => {

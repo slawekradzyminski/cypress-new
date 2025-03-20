@@ -23,3 +23,15 @@ Cypress.Commands.add('login', (username, password) => {
         cy.wrap(response.body.token).as('token')
     })
 })
+
+Cypress.Commands.add('deleteUser', (username, token) => {
+    cy.api({
+        method: 'DELETE',
+        url: `http://localhost:4001/users/${username}`,
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }).then(response => {
+        expect(response.status).to.equal(204)
+    })
+})
