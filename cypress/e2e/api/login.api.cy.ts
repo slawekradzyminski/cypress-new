@@ -1,17 +1,23 @@
 
 /// <reference types="cypress" />
 
+import { generateUser } from "../../generators/userGenerator"
+
 describe('Login API POST /users/signin tests', () => {
 
     it('should successfully login', () => {
+        // given
+        const user = generateUser()
+        cy.register(user)
+
         // when + then
-        cy.request({
+        cy.api({
             method: 'POST',
             url: 'http://localhost:4001/users/signin',
             body: {
-                username: 'admin',
-                password: 'admin',
-            },
+                username: user.username,
+                password: user.password
+            }
         }).then(response => {
             expect(response.status).to.equal(200)
             expect(response.body.token).to.not.be.empty
@@ -21,7 +27,7 @@ describe('Login API POST /users/signin tests', () => {
 
     it('should return 400 for invalid body', () => {
         // when + then
-        cy.request({
+        cy.api({
             method: 'POST',
             url: 'http://localhost:4001/users/signin',
             failOnStatusCode: false,
@@ -37,7 +43,7 @@ describe('Login API POST /users/signin tests', () => {
 
     it('should return 422 for invalid body', () => {
         // when + then
-        cy.request({
+        cy.api({
             method: 'POST',
             url: 'http://localhost:4001/users/signin',
             failOnStatusCode: false,

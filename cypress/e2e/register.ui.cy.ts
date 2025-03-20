@@ -2,7 +2,7 @@
 
 import { generateUser } from "../generators/userGenerator"
 
-describe('Register page tests', () => {
+describe('Register page tests', { env: { snapshotOnly: true } }, () => {
 
     beforeEach(() => {
         cy.visit('http://localhost:8081/register')

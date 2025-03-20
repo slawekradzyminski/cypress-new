@@ -1,6 +1,8 @@
 /// <reference types="cypress" />
 
-describe('Login page tests', () => {
+import { generateUser } from "../generators/userGenerator"
+
+describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
     beforeEach(() => {
         cy.visit('http://localhost:8081')
@@ -14,14 +16,18 @@ describe('Login page tests', () => {
     })
 
     it('should successfully login', () => {
+        // given
+        const user = generateUser()
+        cy.register(user)
+
         // when
-        cy.get('#username').type('admin')
-        cy.get('#password').type('admin')
+        cy.get('#username').type(user.username)
+        cy.get('#password').type(user.password)
         cy.get('button').contains('Sign in').click()
 
         // then
-        cy.get('h1').should('contain.text', 'Slawomir')
-        cy.get('.mt-1').should('have.text', 'awesome@testing.com')
+        cy.get('h1').should('contain.text', user.firstName)
+        cy.get('.mt-1').should('have.text', user.email)
         cy.get('button').contains('View Users').should('be.visible')
         cy.get('.border').contains('Logout').should('be.visible')
     })

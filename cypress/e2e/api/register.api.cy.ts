@@ -22,7 +22,7 @@ describe('Register API POST /users/signup tests', () => {
         }
 
         // when + then
-        cy.request({
+        cy.api({
             method: 'POST',
             url: 'http://localhost:4001/users/signup',
             body: user,
