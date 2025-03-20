@@ -15,8 +15,33 @@ describe('Products page tests', () => {
     })
 
     it('should display products and categories', () => {
+        // then
+        cy.get('[data-testid=product-item]').first().contains('Apple Watch Series 7')
         cy.get('[data-testid=product-item]').should('have.length.at.least', 5)
         cy.get('[data-testid=product-filter-category] li').should('have.length.at.least', 5)
     })
+
+    it('should successfully add "Clean Code" product to basket', () => {
+        // when
+        cy.get('[data-testid=product-item]')
+            .contains('Clean Code') // Find product by name
+            .parents('[data-testid=product-item]') // Get the parent product item container
+            .find('button').contains('Add to Cart') // Find the "Add to Cart" button
+            .click();
+    
+        // then
+        cy.get('._description_gmcqp_50').should('contain.text', 'added to your cart');
+        cy.get('[data-testid=product-item]')
+            .contains('Clean Code') // Find product by name again
+            .parents('[data-testid=product-item]') // Get the parent product item container
+            .within(() => {
+                cy.get('button').contains('Remove').should('be.visible');
+                cy.get('button').contains('Update Cart').should('be.visible');
+                cy.get('button').contains('Add to Cart').should('not.exist');
+                cy.get('.text-blue-600').should('have.text', '1 in cart');
+            });
+    
+        cy.get('[data-testid=desktop-cart-icon] span').should('have.text', '1');
+    });
  })
  
