@@ -11,18 +11,7 @@ describe('Login API POST /users/signin tests', () => {
         cy.register(user)
 
         // when + then
-        cy.api({
-            method: 'POST',
-            url: 'http://localhost:4001/users/signin',
-            body: {
-                username: user.username,
-                password: user.password
-            }
-        }).then(response => {
-            expect(response.status).to.equal(200)
-            expect(response.body.token).to.not.be.empty
-            expect(response.body.token).to.be.a('string')
-        })
+        cy.login(user.username, user.password)
     })
 
     it('should return 400 for invalid body', () => {
