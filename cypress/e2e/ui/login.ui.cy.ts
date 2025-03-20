@@ -11,7 +11,7 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
     it('should display all important login page elements', () => {
         // then
-        cy.get('.mt-6').should('have.text', 'Sign in to your account')
+        cy.get(loginPage.selectors.title).should('have.text', 'Sign in to your account')
         cy.get('a').contains('Login').should('be.visible')
         cy.get('a').contains('Register').should('be.visible')
     })
@@ -50,14 +50,14 @@ describe('Login page tests', { env: { snapshotOnly: true } }, () => {
 
     it('should trigger frontend validation', () => {
         // when
-        cy.get('#username').type('123')
+        cy.get(loginPage.selectors.usernameInput).type('123')
         loginPage.clickSignIn()
 
         // then
-        cy.get('.text-red-600').eq(0).should('have.text', 'Username must be at least 4 characters')
-        cy.get('.text-red-600').eq(1).should('have.text', 'Password is required')
-        cy.get('#username').should('have.class', 'border-red-500')
-        cy.get('#password').should('have.class', 'border-red-500')
+        cy.get(loginPage.selectors.errorMessage).eq(0).should('have.text', 'Username must be at least 4 characters')
+        cy.get(loginPage.selectors.errorMessage).eq(1).should('have.text', 'Password is required')
+        cy.get(loginPage.selectors.usernameInput).should('have.class', 'border-red-500')
+        cy.get(loginPage.selectors.passwordInput).should('have.class', 'border-red-500')
     })
 
 })

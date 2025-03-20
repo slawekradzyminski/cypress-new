@@ -1,8 +1,15 @@
 export const loginPage = {
 
+    selectors: {
+        usernameInput: '#username',
+        passwordInput: '#password',
+        errorMessage: '.text-red-600',
+        title: '.mt-6'
+    },
+
     attemptLogin: (username: string, password: string) => {
-        cy.get('#username').type(username)
-        cy.get('#password').type(password)
+        cy.get(loginPage.selectors.usernameInput).type(username)
+        cy.get(loginPage.selectors.passwordInput).type(password)
         loginPage.clickSignIn()
     },
 
