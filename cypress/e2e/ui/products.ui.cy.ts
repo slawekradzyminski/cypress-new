@@ -43,5 +43,23 @@ describe('Products page tests', () => {
     
         cy.get('[data-testid=desktop-cart-icon] span').should('have.text', '1');
     });
+
+    it('should successfully find "Clean Code"', () => {
+        // when
+        cy.get('[data-testid=product-search]').type('Clean Code')
+
+        // then
+        cy.get('[data-testid=product-item]').should('have.length', 1).contains('Clean Code')
+    })
+
+    it('should show no products found message', () => {
+        // when
+        cy.get('[data-testid=product-search]').type('Invalid Query')
+
+        // then
+        cy.get('[data-testid="no-products-message"]').should('be.visible')
+        cy.get('[data-testid="reset-search-button"]').should('be.visible')
+    })
+
  })
  
