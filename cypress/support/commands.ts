@@ -20,5 +20,6 @@ Cypress.Commands.add('login', (username, password) => {
         expect(response.status).to.equal(200)
         expect(response.body.token).to.not.be.empty
         expect(response.body.token).to.be.a('string')
+        cy.wrap(response.body.token).as('token')
     })
 })
